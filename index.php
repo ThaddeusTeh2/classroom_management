@@ -1,4 +1,5 @@
 <?php
+echo "test";
   // put your backend code
 
   // 1. collect database info
