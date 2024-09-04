@@ -1,4 +1,7 @@
 <?php
+// start session (we will be using session in this page)
+session_start();
+
 echo "test";
   // put your backend code
 
@@ -46,22 +49,33 @@ echo "test";
     </style>
   </head>
   <body>
-    <div class="card rounded shadow-sm mx-auto my-4" style="max-width: 500px">
+  <div class="card rounded shadow-sm mx-auto my-4" style="max-width: 500px">
       <div class="card-body">
         <h3 class="card-title mb-3">My Classroom</h3>
-        <form method="POST" action="add_student.php">
-          <div class="mt-4 d-flex justify-content-between align-items-center">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Add new student..."
-              name="student_name"
-            />
-            <button class="btn btn-primary btn-sm rounded ms-2">Add</button>
-          </div>
-        </form>
+        <?php if ( isset( $_SESSION['user'] ) ) : ?>
+          <h4>Welcome back, <?= $_SESSION['user']['name']; ?></h4>
+
+          <a href="logout.php">Logout</a>
+
+          <form method="POST" action="add_student.php">
+            <div class="mt-4 d-flex justify-content-between align-items-center">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add new student..."
+                name="student_name"
+              />
+              <button class="btn btn-primary btn-sm rounded ms-2">Add</button>
+            </div>
+          </form>
+        <?php else : ?>
+          <a href="login.php">Login</a>
+          <a href="signup.php">Sign Up</a>
+        <?php endif; ?>
       </div>
     </div>
+
+    <?php if ( isset( $_SESSION['user'] ) ) : ?>
 
     <div class="card rounded shadow-sm mx-auto my-4" style="max-width: 500px">
       <div class="card-body">
@@ -96,6 +110,7 @@ echo "test";
         <?php endforeach; ?>
       </div>
     </div>
+    <?php endif; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
