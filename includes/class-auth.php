@@ -17,7 +17,7 @@ class Auth
 
         // 4. check for error (make sure all fields are filled)
         if ( empty( $email ) || empty( $password ) ) {
-            echo "All fields are required";
+            setError( "All fields are required", "/login" );
         } else {
             // 5. check if the email entered is in the system or not
             // 5.1 sql command
@@ -71,7 +71,7 @@ class Auth
             // sql command 
             $sql = "INSERT INTO users (`name`,`email`,`password`) VALUES (:name, :email, :password)";
             // prepare
-            $query = $database->prepare( $sql );
+            $query = $this->database->prepare( $sql );
             // execute
             $query->execute([
                 'name' => $name,
@@ -83,5 +83,15 @@ class Auth
             header("Location: /login");
             exit;
         }
+    }
+
+    public function logout()
+    {
+        // remove the user session
+        unset( $_SESSION['user'] );
+
+        // redirect back to index.php
+        header("Location: /");
+        exit;
     }
 }

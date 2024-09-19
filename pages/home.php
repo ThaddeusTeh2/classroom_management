@@ -19,7 +19,7 @@
         <?php if ( isset( $_SESSION['user'] ) ) : ?>
           <h4>Welcome back, <?= $_SESSION['user']['name']; ?></h4>
           <a href="/logout">Logout</a>
-          <form method="POST" action="/student/add">
+          <form method="POST" action="/actions/add">
             <div class="mt-4 d-flex justify-content-between align-items-center">
               <input
                 type="text"
@@ -49,7 +49,7 @@
                 <!-- UPDATE -->
                 <form
                   method="POST"
-                  action="/student/edit"
+                  action="/actions/edit"
                   >
                   <input type="text" name="student_name" value="<?= $student["name"]; ?>" style="width: 300px;" />
                   <input type="hidden" name="student_id" value="<?= $student["id"]; ?>" />
@@ -58,7 +58,7 @@
                 <!-- DELETE -->
                 <form
                   method="POST"
-                  action="/student/delete"
+                  action="/actions/delete"
                   >
                   <input type="hidden" name="student_id" value="<?= $student["id"]; ?>" />
                   <button class="btn btn-danger btn-sm">Delete</button>

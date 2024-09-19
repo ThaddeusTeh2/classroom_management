@@ -6,9 +6,11 @@
 
   // load the class files
   require 'includes/class-auth.php';
+  require 'includes/class-student.php';
 
   // initiatise the classes
   $auth = new Auth();
+  $studentactions = new StudentActions();
 
   //figure out the url the user is visiting
   $path = $_SERVER["REQUEST_URI"];
@@ -24,20 +26,10 @@
       require 'pages/signup.php';
       break;
 
-      case'/logout';
-      require 'pages/logout.php';
+    case'/logout';
+      $auth->logout();
       break;
 
-    // Student
-    case '/student/add':
-      require 'includes/student/add.php';
-      break;
-    case '/student/edit':
-      require 'includes/student/edit.php';
-      break;
-    case '/student/delete':
-      require 'includes/student/delete.php';
-      break;
 
     // Auth
     case '/auth/login':
@@ -45,6 +37,18 @@
       break;
     case '/auth/signup':
       $auth->signup();
+      break;
+
+      // Student Actions
+    case '/actions/add':
+      $studentactions->add();
+      break;
+    case '/actions/delete':
+      $studentactions->delete();
+      break;
+
+    case '/actions/edit':
+      $studentactions->edit();
       break;
       
     // Default
